@@ -6,11 +6,6 @@
 
 **Comparador inteligente de preços de supermercado, com calculadoras financeiras, lista de compras e controle de orçamento.**
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-![Sem dependências](https://img.shields.io/badge/sem%20dependências-brightgreen?style=flat)
-
 **[🔗 Acessar o app online](https://SEU-PROJETO.vercel.app)** · Instalável no celular e no computador (PWA)
 
 </div>
