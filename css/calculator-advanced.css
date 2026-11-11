@@ -1,0 +1,227 @@
+/**
+ * Economarket - calculator-advanced.css
+ * Estilos da Calculadora Aprimorada (Desafio 2 da Imersão):
+ * Comparador de Preço por Peso/Volume, Simulador de Descontos e Ofertas Especiais.
+ */
+
+.advanced-calc-container {
+  max-width: 960px;
+  margin: 2rem auto;
+}
+
+.adv-tabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.adv-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-lg);
+  font-size: 0.875rem;
+  font-weight: 700;
+  background: var(--bg-card);
+  color: var(--slate-600);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.adv-tab-btn:hover {
+  background: var(--slate-50);
+  color: var(--slate-900);
+}
+
+.adv-tab-btn.active {
+  background: linear-gradient(135deg, var(--slate-900), var(--slate-800));
+  color: var(--text-white);
+  border-color: var(--slate-700);
+  box-shadow: var(--shadow-md);
+}
+
+.adv-tab-btn.active .tab-icon {
+  color: var(--green-400);
+}
+
+/* Painel de Ferramentas */
+.adv-tool-panel {
+  display: none;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+}
+
+.adv-tool-panel.active {
+  display: block;
+}
+
+.tool-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.tool-header h3 {
+  font-size: 1.25rem;
+  color: var(--slate-900);
+}
+
+.tool-header p {
+  font-size: 0.875rem;
+  color: var(--slate-500);
+}
+
+/* Grade de Comparação de Embalagens */
+.packages-compare-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 601px) {
+  .packages-compare-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .advanced-calc-container {
+    padding: 0 0.5rem;
+    margin: 1rem auto 3rem;
+  }
+  
+  .card-header-adv {
+    padding: 1.25rem 1rem;
+  }
+  
+  .card-body-adv {
+    padding: 1.25rem 1rem;
+  }
+}
+
+.package-card {
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--border-light);
+  background: var(--slate-50);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all var(--transition-fast);
+}
+
+.package-card.winner {
+  border-color: var(--green-500);
+  background: linear-gradient(135deg, rgba(236, 253, 245, 0.7), #ffffff);
+  box-shadow: var(--shadow-glow-green);
+}
+
+.package-card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--slate-900);
+}
+
+.package-winner-badge {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: var(--green-600);
+  color: var(--text-white);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  display: none;
+}
+
+.package-card.winner .package-winner-badge {
+  display: inline-flex;
+}
+
+.unit-price-result {
+  padding: 0.75rem 1rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.unit-price-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--slate-400);
+  text-transform: uppercase;
+}
+
+.unit-price-val {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--slate-900);
+}
+
+.package-card.winner .unit-price-val {
+  color: var(--green-700);
+}
+
+/* Caixa de Veredito / Economia */
+.adv-verdict-box {
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--slate-900), var(--slate-800));
+  color: var(--text-white);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid var(--slate-700);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (min-width: 640px) {
+  .adv-verdict-box {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.verdict-text-group h4 {
+  color: var(--text-white);
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.verdict-text-group p {
+  color: var(--slate-300);
+  font-size: 0.8125rem;
+}
+
+.verdict-savings-badge {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--green-400);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Ferramenta de Promoções (Leve Mais por Menos) */
+.promo-controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+

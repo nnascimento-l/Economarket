@@ -1,0 +1,327 @@
+/**
+ * Economarket - todo-list.css
+ * Estilos da Lista de Compras Rápida (To-Do List - Desafio 3 da Imersão).
+ */
+
+.todo-page-container {
+  max-width: 820px;
+  margin: 2rem auto;
+}
+
+.todo-main-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.todo-card-header {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(236, 253, 245, 0.7) 0%, rgba(240, 249, 255, 0.6) 100%);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .todo-card-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.todo-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.todo-header-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--green-600), var(--teal-600));
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: var(--shadow-glow-green);
+}
+
+.todo-stats-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.todo-stat-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--slate-700);
+}
+
+/* Formulário de Adição */
+.todo-input-form {
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.todo-text-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: var(--slate-50);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--slate-900);
+  transition: all var(--transition-fast);
+}
+
+.todo-text-input:focus {
+  background: var(--bg-card);
+  border-color: var(--green-600);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+/* Filtros de Lista (Todos, Pendentes, No Carrinho) */
+.todo-tabs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: var(--slate-50);
+  border-bottom: 1px solid var(--border-light);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.todo-filter-btns {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.todo-filter-btn {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  color: var(--slate-600);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.todo-filter-btn:hover {
+  background: var(--slate-200);
+}
+
+.todo-filter-btn.active {
+  background: var(--slate-900);
+  color: var(--text-white);
+}
+
+/* Itens da Lista */
+.todo-items-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  user-select: none;
+}
+
+.todo-item-row:hover {
+  background: rgba(240, 249, 255, 0.4);
+}
+
+/* Estado No Carrinho / Concluído */
+.todo-item-row.completed {
+  background: rgba(236, 253, 245, 0.7);
+  border-left: 4px solid var(--green-500);
+}
+
+.todo-item-row.completed:hover {
+  background: rgba(236, 253, 245, 0.9);
+}
+
+.todo-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-check-circle {
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--slate-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.todo-item-row:hover .todo-check-circle {
+  border-color: var(--green-500);
+}
+
+.todo-item-row.completed .todo-check-circle {
+  background: var(--green-600);
+  border-color: var(--green-600);
+  color: var(--text-white);
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.3);
+}
+
+.todo-item-name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--slate-900);
+  transition: all var(--transition-fast);
+  word-break: break-word;
+}
+
+.todo-item-row.completed .todo-item-name {
+  text-decoration: line-through;
+  text-decoration-color: rgba(16, 185, 129, 0.7);
+  text-decoration-thickness: 2px;
+  color: var(--slate-500);
+}
+
+.cart-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: var(--green-100);
+  color: var(--green-800);
+  border: 1px solid var(--green-200);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+.todo-matched-offer {
+  font-size: 0.6875rem;
+  color: var(--green-800);
+  background: var(--green-50);
+  border: 1px solid var(--green-200);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .todo-matched-offer {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+}
+
+.todo-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.todo-trash-btn {
+  padding: 0.4rem;
+  color: var(--slate-400);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.todo-trash-btn:hover {
+  color: var(--rose-600);
+  background: var(--rose-50);
+}
+
+/* Estado Vazio */
+.todo-empty-state {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--slate-500);
+}
+
+.todo-empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.6;
+}
+
+/* Responsividade Mobile para a Lista de Compras */
+@media (max-width: 600px) {
+  .todo-page-container {
+    margin: 1rem auto 3rem;
+  }
+
+  .todo-card-header {
+    padding: 1.25rem 1rem;
+  }
+
+  .todo-input-form {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .todo-text-input {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .todo-input-form .btn-primary {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .todo-item-row {
+    padding: 0.875rem 1rem;
+    min-height: 48px;
+  }
+
+  .todo-trash-btn {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .todo-filter-btn {
+    min-height: 40px;
+    padding: 0.35rem 0.65rem;
+  }
+}
+

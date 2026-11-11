@@ -1,0 +1,583 @@
+/**
+ * Economarket - budget-calculator.css
+ * Estilos do módulo "Calculadora de Orçamento Limite — Sacola Controlada".
+ * Tema escuro e azul com indicadores dinâmicos em verde, amarelo e vermelho.
+ */
+
+.budget-container {
+  max-width: 1040px;
+  margin: 2rem auto 4rem;
+}
+
+/* Banner Superior do Painel */
+.budget-hero-card {
+  background: linear-gradient(135deg, var(--slate-900) 0%, var(--slate-800) 60%, rgba(2, 132, 199, 0.25) 100%);
+  border: 1px solid var(--slate-700);
+  border-radius: var(--radius-xl);
+  padding: 2rem 2.25rem;
+  color: var(--text-white);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(16, 185, 129, 0.12);
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.budget-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.875rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--green-300);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  margin-bottom: 0.875rem;
+}
+
+.budget-hero-title {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: var(--text-white);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.budget-hero-title span {
+  color: var(--green-400);
+}
+
+.budget-hero-subtitle {
+  margin-top: 0.625rem;
+  font-size: 0.95rem;
+  color: var(--slate-300);
+  max-width: 760px;
+  line-height: 1.6;
+}
+
+/* Painel de Métricas Principais */
+.budget-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .budget-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .budget-metrics-grid {
+    grid-template-columns: 1.25fr 1fr 1.25fr;
+  }
+}
+
+.budget-metric-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 1.35rem 1.5rem;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+}
+
+.budget-metric-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--slate-300);
+}
+
+.budget-metric-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.budget-metric-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--slate-500);
+}
+
+.budget-metric-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.budget-metric-icon.icon-limit {
+  background: var(--blue-50);
+  color: var(--blue-600);
+}
+
+.budget-metric-icon.icon-cart {
+  background: rgba(2, 132, 199, 0.12);
+  color: var(--blue-700);
+}
+
+.budget-metric-icon.icon-balance {
+  background: var(--green-100);
+  color: var(--green-700);
+}
+
+/* Campo Editável do Teto/Limite */
+.budget-limit-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.budget-currency-symbol {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--slate-500);
+}
+
+.budget-limit-input {
+  width: 100%;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  background: var(--slate-50);
+  transition: all var(--transition-fast);
+}
+
+.budget-limit-input:focus {
+  background: #ffffff;
+  border-color: var(--green-500);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.budget-preset-chips {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.budget-preset-chip {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  background: var(--slate-100);
+  color: var(--slate-600);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.budget-preset-chip:hover {
+  background: var(--green-50);
+  color: var(--green-700);
+  border-color: var(--green-200);
+}
+
+/* Valores das Métricas */
+.budget-metric-val {
+  font-size: 1.875rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--slate-900);
+}
+
+.budget-metric-sub {
+  font-size: 0.75rem;
+  color: var(--slate-400);
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+/* Cores Dinâmicas do Saldo */
+.saldo-verde {
+  color: var(--green-600) !important;
+}
+
+.saldo-amarelo {
+  color: var(--amber-600) !important;
+}
+
+.saldo-vermelho {
+  color: var(--rose-600) !important;
+}
+
+/* Card da Barra de Progresso do Orçamento */
+.budget-progress-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+}
+
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.progress-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progress-title {
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--slate-800);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.progress-status-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.status-badge-green {
+  background: var(--green-50);
+  color: var(--green-800);
+  border: 1px solid var(--green-200);
+}
+
+.status-badge-yellow {
+  background: var(--amber-50);
+  color: var(--amber-800);
+  border: 1px solid var(--amber-200);
+}
+
+.status-badge-red {
+  background: var(--rose-50);
+  color: var(--rose-800);
+  border: 1px solid var(--rose-200);
+  animation: pulseGlow 1.8s infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.15); }
+}
+
+.progress-percent-text {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--slate-800);
+}
+
+/* Trilho e Barra de Progresso */
+.progress-track {
+  width: 100%;
+  height: 1.15rem;
+  background: var(--slate-100);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--slate-200);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+  min-width: 0%;
+}
+
+.progress-bar-fill.bar-green {
+  background: linear-gradient(90deg, var(--green-500), var(--teal-500));
+}
+
+.progress-bar-fill.bar-yellow {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.progress-bar-fill.bar-red {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.5);
+}
+
+/* Alertas Visuais Dinâmicos */
+.budget-alert-banner {
+  margin-top: 1rem;
+  padding: 0.875rem 1.125rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  animation: fadeIn 0.3s ease;
+}
+
+.budget-alert-banner.alert-yellow {
+  background: var(--amber-50);
+  color: var(--amber-900);
+  border: 1px solid var(--amber-200);
+}
+
+.budget-alert-banner.alert-red {
+  background: var(--rose-50);
+  color: var(--rose-900);
+  border: 1px solid var(--rose-200);
+}
+
+/* Formulário de Adicionar Produto à Sacola */
+.budget-form-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.budget-form-header {
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, rgba(236, 253, 245, 0.6) 0%, rgba(240, 249, 255, 0.5) 100%);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.budget-form-header h3 {
+  font-size: 1.05rem;
+  color: var(--slate-900);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.budget-form-body {
+  padding: 1.5rem;
+}
+
+.budget-input-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .budget-input-row { grid-template-columns: 1fr 1fr; }
+  .budget-input-row > :last-child { grid-column: 1 / -1; }
+}
+@media (min-width: 1025px) {
+  .budget-input-row { grid-template-columns: 2fr 1fr 1fr auto; }
+}
+
+.item-subtotal-preview {
+  font-size: 0.75rem;
+  color: var(--slate-500);
+  margin-top: 0.35rem;
+}
+
+.item-subtotal-preview strong {
+  color: var(--green-700);
+}
+
+/* Tabela e Lista da Sacola Controlada */
+.budget-cart-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.budget-cart-header {
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+#budget-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cart-items-table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+}
+
+.cart-items-table th {
+  padding: 0.75rem 1.25rem;
+  text-align: left;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--slate-400);
+  background: var(--slate-50);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.cart-items-table th.text-right {
+  text-align: right;
+}
+
+.cart-items-table td {
+  padding: 1rem 1.25rem;
+  font-size: 0.875rem;
+  color: var(--slate-700);
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: middle;
+}
+
+.cart-items-table td.text-right {
+  text-align: right;
+}
+
+.cart-item-row:hover {
+  background: rgba(240, 249, 255, 0.4);
+}
+
+.cart-item-name {
+  font-weight: 700;
+  color: var(--slate-900);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cart-item-subtotal {
+  font-weight: 800;
+  color: var(--slate-900);
+  font-size: 1rem;
+}
+
+.cart-delete-btn {
+  padding: 0.4rem;
+  color: var(--slate-400);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.cart-delete-btn:hover {
+  color: var(--rose-600);
+  background: var(--rose-50);
+}
+
+/* Rodapé da Sacola */
+.budget-cart-footer {
+  padding: 1.25rem 1.5rem;
+  background: var(--slate-50);
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cart-total-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.cart-total-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--slate-600);
+  text-transform: uppercase;
+}
+
+.cart-total-amount {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--slate-900);
+}
+
+/* Estado Vazio */
+.budget-empty-bag {
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  color: var(--slate-500);
+}
+
+.budget-empty-icon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.6;
+}
+
+/* Responsividade Mobile para a Sacola Controlada */
+@media (max-width: 640px) {
+  .budget-container {
+    margin: 1rem auto 3rem;
+  }
+
+  .budget-hero-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .budget-hero-title {
+    font-size: 1.5rem;
+  }
+
+  .budget-preset-chip {
+    min-height: 44px;
+    padding: 0.35rem 0.65rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .budget-form-header,
+  .budget-form-body,
+  .budget-cart-header,
+  .budget-cart-footer {
+    padding: 1rem;
+  }
+
+  .cart-delete-btn {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+}
+

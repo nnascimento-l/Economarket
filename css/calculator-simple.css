@@ -1,0 +1,203 @@
+/**
+ * Economarket - calculator-simple.css
+ * Estilos da Calculadora Comercial Rápida (Desafio 1 da Imersão).
+ */
+
+.calculator-wrapper {
+  max-width: 480px;
+  margin: 2rem auto;
+  background: var(--slate-900);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(2, 132, 199, 0.15);
+  border: 1px solid var(--slate-800);
+  color: var(--text-white);
+}
+
+.calc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.calc-title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.calc-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  background: rgba(2, 132, 199, 0.2);
+  color: var(--blue-400);
+  border: 1px solid rgba(2, 132, 199, 0.4);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+/* Visor Digital */
+.calc-display {
+  background: #020617;
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  text-align: right;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.calc-history-text {
+  font-size: 0.875rem;
+  color: var(--slate-400);
+  min-height: 1.25rem;
+  font-family: var(--font-mono);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.calc-current-text {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--green-400);
+  font-family: var(--font-mono);
+  overflow-x: auto;
+  white-space: nowrap;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+/* Teclado */
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.625rem;
+}
+
+.calc-key {
+  padding: 1rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  color: var(--text-white);
+  background: var(--slate-800);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.calc-key:hover {
+  background: var(--slate-700);
+  transform: translateY(-1px);
+}
+
+.calc-key:active {
+  transform: translateY(1px);
+}
+
+.calc-key.key-op {
+  background: rgba(2, 132, 199, 0.25);
+  color: var(--blue-400);
+  border-color: rgba(2, 132, 199, 0.4);
+}
+
+.calc-key.key-op:hover {
+  background: rgba(2, 132, 199, 0.45);
+}
+
+.calc-key.key-clear {
+  background: rgba(244, 63, 94, 0.2);
+  color: #fda4af;
+  border-color: rgba(244, 63, 94, 0.4);
+}
+
+.calc-key.key-clear:hover {
+  background: rgba(244, 63, 94, 0.35);
+}
+
+.calc-key.key-equals {
+  background: linear-gradient(135deg, var(--green-600), var(--teal-600));
+  color: var(--text-white);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  font-size: 1.5rem;
+}
+
+.calc-key.key-equals:hover {
+  background: linear-gradient(135deg, var(--green-500), var(--teal-500));
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.calc-key.key-zero {
+  grid-column: span 2;
+}
+
+/* Histórico de Fitas de Cálculo */
+.calc-tape-section {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tape-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--slate-400);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.tape-list {
+  max-height: 120px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  padding-right: 0.25rem;
+}
+
+.tape-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--slate-300);
+}
+
+.tape-item .tape-result {
+  color: var(--green-400);
+  font-weight: 700;
+}
+
+/* Responsividade Mobile para a Calculadora Rápida */
+@media (max-width: 480px) {
+  .calculator-wrapper {
+    margin: 1rem auto 2.5rem;
+    padding: 1rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .calc-current-text {
+    font-size: 1.85rem;
+  }
+
+  .calc-key {
+    min-height: 48px;
+    padding: 0.75rem 0;
+    font-size: 1.15rem;
+  }
+}
+

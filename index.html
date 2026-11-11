@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Economarket - Comparador Inteligente & Desafios da Imersão</title>
+  <meta name="description"
+    content="Compare preços entre supermercados, simule economia em lote e acesse as calculadoras financeiras e lista de compras." />
+
+  <!-- PWA: instalação como app -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#059669" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Economarket" />
+
+  <!-- Estilos Modulares Puros (Sem Frameworks / Sem Node) -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/calculator-simple.css" />
+  <link rel="stylesheet" href="css/calculator-advanced.css" />
+  <link rel="stylesheet" href="css/todo-list.css" />
+  <link rel="stylesheet" href="css/lessons.css" />
+  <link rel="stylesheet" href="css/budget-calculator.css" />
+</head>
+
+<body>
+
+  <!-- Barra de Navegação no Topo (Navbar) -->
+  <header class="app-navbar">
+    <div class="container navbar-container">
+      <!-- Marca / Logo -->
+      <a href="#home" class="nav-brand" data-route="home"><img src="assets/logo.png" alt="Economarket Logo"
+          class="nav-logo-img" /></a>
+
+      <!-- Botões de Navegação Dinâmica -->
+      <nav class="nav-menu">
+        <button type="button" class="nav-link-btn active" data-route="home" title="Página principal do comparador">
+          <span class="nav-icon">🏠</span>
+          <span>Início</span>
+        </button>
+
+        <button type="button" class="nav-link-btn" data-route="calculator-simple" title="Desafio 1: Calculadora Rápida">
+          <span class="nav-icon">🧮</span>
+          <span>Calculadora</span>
+        </button>
+
+        <button type="button" class="nav-link-btn" data-route="calculator-advanced"
+          title="Desafio 2: Calculadora Aprimorada & Embalagens">
+          <span class="nav-icon">💲</span>
+          <span>Calc Aprimorada</span>
+        </button>
+
+        <button type="button" class="nav-link-btn" data-route="todo-list" title="Desafio 3: Lista de Compras">
+          <span class="nav-icon">☑️</span>
+          <span>Lista de Compras</span>
+        </button>
+
+        <button type="button" class="nav-btn" data-target="view-budget"
+          title="Calculadora de Orçamento Limite — Sacola Controlada">
+          <span class="nav-icon">💰</span>
+          <span>Orçamento Limite</span>
+        </button>
+
+        <button type="button" class="nav-btn" data-target="view-lessons" title="Trajetória e Aulas da Imersão">
+          <span class="nav-icon">📖</span>
+          <span>Aulas</span>
+        </button>
+      </nav>
+
+      <!-- Ações Rápidas -->
+      <div class="nav-actions">
+        <button type="button" id="btn-navbar-new-offer" class="btn-new-offer" title="Cadastrar nova cotação de preço">
+          <span style="font-weight: 800; font-size: 1rem;">+</span>
+          <span>Nova Oferta</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Container Principal das Seções Dinâmicas -->
+  <main class="app-main">
+
+    <!-- ========================================== -->
+    <!-- 1. SEÇÃO PRINCIPAL (INÍCIO - ECONOMARKET)  -->
+    <!-- ========================================== -->
+    <section id="sec-home" class="route-section active" data-section="home">
+      <!-- Hero Banner -->
+      <div class="hero-section">
+        <div class="container">
+          <div class="hero-pill">
+            <span>✨</span>
+            <span>Economia inteligente antes de sair de casa</span>
+          </div>
+          <h1 class="hero-title">Compare preços de supermercados e economize até 35%</h1>
+          <p class="hero-subtitle">
+            Descubra em qual rede cada item da sua cesta está mais barato, simule compras em lote e planeje sua economia
+            mensal.
+          </p>
+        </div>
+      </div>
+
+      <div class="container main-content-offset">
+        <!-- Painel de Resumo / Estatísticas -->
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="summary-header">
+              <span class="summary-label">Produtos Cotados</span>
+              <div class="summary-icon icon-blue">📦</div>
+            </div>
+            <div class="summary-value-group">
+              <span id="stat-total-products" class="summary-value">6</span>
+              <span class="summary-unit">itens</span>
+            </div>
+            <p id="stat-total-offers" class="summary-desc">23 cotações cadastradas</p>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-header">
+              <span class="summary-label">Variação Média</span>
+              <div class="summary-icon icon-amber">📊</div>
+            </div>
+            <div class="summary-value-group">
+              <span id="stat-avg-variation" class="summary-value">27.2%</span>
+              <span class="summary-unit">diferença</span>
+            </div>
+            <p class="summary-desc">Variação entre o mais caro e o mais barato</p>
+          </div>
+
+          <div class="summary-card highlight">
+            <div class="summary-header">
+              <span class="summary-label">Economia Potencial</span>
+              <div class="summary-icon icon-green">💰</div>
+            </div>
+            <div class="summary-value-group">
+              <span id="stat-potential-savings" class="summary-value">R$ 40,91</span>
+            </div>
+            <p class="summary-desc" style="color: var(--green-700); font-weight: 600;">Ao comprar sempre no menor preço
+            </p>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-header">
+              <span class="summary-label">Mais Econômico</span>
+              <div class="summary-icon icon-purple">🏆</div>
+            </div>
+            <div class="summary-value-group">
+              <span id="stat-best-market" class="summary-value" style="font-size: 1.15rem;">Atacadão</span>
+            </div>
+            <p class="summary-desc">Líder em preços mais baixos</p>
+          </div>
+        </div>
+
+        <!-- Busca -->
+        <div class="search-filter-card">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="home-search-input" class="search-input"
+              placeholder="Pesquisar produto pelo nome... (ex: Café, Leite, Arroz)" />
+          </div>
+
+          <!-- Só aparece quando há categoria escolhida ou busca -->
+          <div id="home-list-toolbar" class="filter-footer" hidden>
+            <div id="home-results-count" class="results-count">0 produtos comparados</div>
+            <div class="filter-selects">
+              <select id="home-supermarket-select" class="form-select">
+                <option value="Todos">Todos os Supermercados</option>
+              </select>
+              <select id="home-sort-select" class="form-select">
+                <option value="savings_desc">Maior Economia (%)</option>
+                <option value="price_asc">Menor Preço Inicial (R$)</option>
+                <option value="name_asc">Nome do Produto (A-Z)</option>
+                <option value="offers_desc">Mais Redes Cotadas</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- VISÃO GERAL: categorias + top 4 -->
+        <div id="home-overview">
+          <section class="home-block">
+            <div class="home-block-head">
+              <h2>Categorias principais</h2>
+              <p>Escolha uma categoria para comparar os preços entre os mercados.</p>
+            </div>
+            <div id="home-category-grid" class="category-grid"></div>
+          </section>
+
+          <section class="home-block">
+            <div class="home-block-head">
+              <h2>🔥 Maiores Economias da Semana</h2>
+              <p>Os 4 produtos com maior diferença de preço entre os supermercados.</p>
+            </div>
+            <div id="home-top-savings" class="top-savings-grid"></div>
+          </section>
+        </div>
+
+        <!-- LISTA FILTRADA: aparece ao clicar numa categoria ou buscar -->
+        <div id="home-list-view" hidden>
+          <div class="list-head">
+            <button type="button" class="btn-back" data-home-action="back">← Todas as categorias</button>
+            <h2 id="home-list-title"></h2>
+          </div>
+          <div id="home-products-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 2. SEÇÃO DESAFIO 1: CALCULADORA RÁPIDA     -->
+    <!-- ========================================== -->
+    <section id="sec-calculator-simple" class="route-section" data-section="calculator-simple">
+      <div class="container">
+        <div class="calculator-wrapper">
+          <div class="calc-header">
+            <div class="calc-title">
+              <span>🧮</span>
+              <span>Calculadora de Mercado</span>
+            </div>
+            <span class="calc-badge">Desafio 1</span>
+          </div>
+
+          <!-- Visor Digital -->
+          <div class="calc-display">
+            <div id="calc-history-display" class="calc-history-text"></div>
+            <div id="calc-current-display" class="calc-current-text">0</div>
+          </div>
+
+          <!-- Teclado Numérico & Operações -->
+          <div id="simple-calc-keypad" class="calc-grid">
+            <button type="button" class="calc-key key-clear" data-calc-action="clear">C</button>
+            <button type="button" class="calc-key" data-calc-action="del">⌫</button>
+            <button type="button" class="calc-key key-op" data-calc-action="op" data-calc-val="%">%</button>
+            <button type="button" class="calc-key key-op" data-calc-action="op" data-calc-val="/">÷</button>
+
+            <button type="button" class="calc-key" data-calc-action="num" data-calc-val="7">7</button>
+            <button type="button" class="calc-key" data-calc-action="num" data-calc-val="8">8</button>
+            <button type="button" class="calc-key" data-calc-action="num" data-calc-val="9">9</button>
+            <button type="button" class="calc-key key-op" data-calc-action="op" data-calc-val="*">×</button>
+
+            <button type="button" class="calc-key" data-calc-action="num" data-calc-val="4">4</button>
+            <button type="button" class="calc-key" data-calc-action="num" data-calc-val="5">5</button>
+            <button type="button" class="calc-key" data-calc-action="num" data-calc-val="6">6</button>
+            <button type="button" class="calc-key key-op" data-calc-action="op" data-calc-val="-">−</button>
+
+            <button type="button" class="calc-key" data-calc-action="num" data-calc-val="1">1</button>
+            <button type="button" class="calc-key" data-calc-action="num" data-calc-val="2">2</button>
+            <button type="button" class="calc-key" data-calc-action="num" data-calc-val="3">3</button>
+            <button type="button" class="calc-key key-op" data-calc-action="op" data-calc-val="+">+</button>
+
+            <button type="button" class="calc-key key-zero" data-calc-action="num" data-calc-val="0">0</button>
+            <button type="button" class="calc-key" data-calc-action="decimal">,</button>
+            <button type="button" class="calc-key key-equals" data-calc-action="equals">=</button>
+          </div>
+
+          <!-- Fita de Histórico Recente -->
+          <div class="calc-tape-section">
+            <div class="tape-header">
+              <span>Histórico de Cálculos</span>
+              <button type="button" id="btn-clear-calc-tape"
+                style="color: var(--rose-400); font-size: 0.6875rem; text-transform: uppercase;">Limpar</button>
+            </div>
+            <div id="calc-tape-items" class="tape-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 3. SEÇÃO DESAFIO 2: CALCULADORA APRIMORADA -->
+    <!-- ========================================== -->
+    <section id="sec-calculator-advanced" class="route-section" data-section="calculator-advanced">
+      <div class="container">
+        <div class="advanced-calc-container">
+
+          <!-- Abas de Ferramentas -->
+          <div class="adv-tabs-bar">
+            <button type="button" class="adv-tab-btn active" data-adv-tool="packaging">
+              <span class="tab-icon">⚖️</span>
+              <span>Comparador de Embalagens (Peso / Volume)</span>
+            </button>
+            <button type="button" class="adv-tab-btn" data-adv-tool="promo">
+              <span class="tab-icon">🏷️</span>
+              <span>Simulador Leve + Pague Menos</span>
+            </button>
+            <button type="button" class="adv-tab-btn" data-adv-tool="discount">
+              <span class="tab-icon">💳</span>
+              <span>Desconto Clube / À Vista</span>
+            </button>
+          </div>
+
+          <!-- Ferramenta 1: Comparador de Embalagens -->
+          <div class="adv-tool-panel active" data-tool-panel="packaging">
+            <div class="tool-header">
+              <h3>⚖️ Comparador de Preço por Peso / Volume</h3>
+              <p>Descubra qual tamanho de produto compensa mais comprar calculando o valor exato por kg ou por litro.
+              </p>
+            </div>
+
+            <div class="packages-compare-grid">
+              <!-- Embalagem A -->
+              <div id="card-pack-a" class="package-card">
+                <div class="package-card-title">
+                  <span>Opção A (Menor ou Padrão)</span>
+                  <span class="package-winner-badge">🏆 Mais Econômica</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Preço (R$)</label>
+                  <input type="number" id="pack-a-price" class="form-input" value="15.90" step="0.01" />
+                </div>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 0.5rem;">
+                  <div class="form-group">
+                    <label class="form-label">Quantidade</label>
+                    <input type="number" id="pack-a-amount" class="form-input" value="400" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Unidade</label>
+                    <select id="pack-a-unit" class="form-select">
+                      <option value="g" selected>g</option>
+                      <option value="kg">kg</option>
+                      <option value="ml">ml</option>
+                      <option value="l">L</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="unit-price-result">
+                  <div class="unit-price-label">Preço Calculado por kg/L</div>
+                  <div id="pack-a-unit-result" class="unit-price-val">R$ 39,75 / kg</div>
+                </div>
+              </div>
+
+              <!-- Embalagem B -->
+              <div id="card-pack-b" class="package-card">
+                <div class="package-card-title">
+                  <span>Opção B (Tamanho Família / Econômico)</span>
+                  <span class="package-winner-badge">🏆 Mais Econômica</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Preço (R$)</label>
+                  <input type="number" id="pack-b-price" class="form-input" value="32.50" step="0.01" />
+                </div>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 0.5rem;">
+                  <div class="form-group">
+                    <label class="form-label">Quantidade</label>
+                    <input type="number" id="pack-b-amount" class="form-input" value="1" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Unidade</label>
+                    <select id="pack-b-unit" class="form-select">
+                      <option value="g">g</option>
+                      <option value="kg" selected>kg</option>
+                      <option value="ml">ml</option>
+                      <option value="l">L</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="unit-price-result">
+                  <div class="unit-price-label">Preço Calculado por kg/L</div>
+                  <div id="pack-b-unit-result" class="unit-price-val">R$ 32,50 / kg</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Caixa de Veredito / Economia -->
+            <div id="packaging-verdict" class="adv-verdict-box"></div>
+          </div>
+
+          <!-- Ferramenta 2: Simulador Leve Mais por Menos -->
+          <div class="adv-tool-panel" data-tool-panel="promo">
+            <div class="tool-header">
+              <h3>🏷️ Simulador de Promoções ("Leve X Pague Y")</h3>
+              <p>Avalie promoções comuns de supermercado e descubra se o desconto unitário realmente compensa.</p>
+            </div>
+
+            <div class="promo-controls-grid">
+              <div class="form-group">
+                <label class="form-label">Preço Normal Unitário (R$)</label>
+                <input type="number" id="promo-unit-price" class="form-input" value="8.90" step="0.01" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Leve (Qtd)</label>
+                <input type="number" id="promo-buy-qty" class="form-input" value="3" min="1" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Pague (Qtd)</label>
+                <input type="number" id="promo-pay-qty" class="form-input" value="2" min="1" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Total Pretendido</label>
+                <input type="number" id="promo-total-qty" class="form-input" value="6" min="1" />
+              </div>
+            </div>
+
+            <div class="summary-grid">
+              <div class="summary-card">
+                <div class="summary-label">Preço Normal Sem Promoção</div>
+                <div id="promo-regular-total" class="summary-value"
+                  style="color: var(--slate-600); text-decoration: line-through;">R$ 53,40</div>
+              </div>
+              <div class="summary-card highlight">
+                <div class="summary-label">Total Promocional</div>
+                <div id="promo-final-total" class="summary-value">R$ 35,60</div>
+              </div>
+              <div class="summary-card highlight">
+                <div class="summary-label">Economia no Bolso</div>
+                <div id="promo-savings-total" class="summary-value">R$ 17,80 (33.3%)</div>
+              </div>
+              <div class="summary-card">
+                <div class="summary-label">Preço Médio / Unidade</div>
+                <div id="promo-effective-price" class="summary-value" style="font-size: 1.25rem;">R$ 5,93 / un</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ferramenta 3: Desconto Clube / À Vista -->
+          <div class="adv-tool-panel" data-tool-panel="discount">
+            <div class="tool-header">
+              <h3>💳 Desconto Percentual de Clube / À Vista</h3>
+              <p>Calcule o valor líquido a pagar com desconto de aplicativo ou clube de fidelidade do mercado.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+              <div class="form-group">
+                <label class="form-label">Preço na Etiqueta (R$)</label>
+                <input type="number" id="disc-price" class="form-input" value="120.00" step="0.01" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Desconto Oferecido (%)</label>
+                <input type="number" id="disc-percent" class="form-input" value="15" min="0" max="100" />
+              </div>
+            </div>
+
+            <div class="summary-grid" style="grid-template-columns: repeat(3, 1fr);">
+              <div class="summary-card">
+                <div class="summary-label">Valor Original</div>
+                <div id="disc-res-original" class="summary-value" style="color: var(--slate-600);">R$ 120,00</div>
+              </div>
+              <div class="summary-card highlight">
+                <div class="summary-label">Economia Direta</div>
+                <div id="disc-res-savings" class="summary-value">-R$ 18,00 (15%)</div>
+              </div>
+              <div class="summary-card highlight">
+                <div class="summary-label">Valor Final a Pagar</div>
+                <div id="disc-res-final" class="summary-value" style="color: var(--green-700);">R$ 102,00</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 4. SEÇÃO DESAFIO 3: LISTA DE COMPRAS (TODO)-->
+    <!-- ========================================== -->
+    <section id="sec-todo-list" class="route-section" data-section="todo-list">
+      <div class="container">
+        <div class="todo-page-container">
+          <div class="todo-main-card">
+            <!-- Cabeçalho -->
+            <div class="todo-card-header">
+              <div class="todo-title-group">
+                <div class="todo-header-icon">☑️</div>
+                <div>
+                  <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--slate-900);">Lista de Compras
+                    Inteligente</h2>
+                  <p style="font-size: 0.8125rem; color: var(--slate-500);">Clique no item para marcar como "No Carrinho
+                    / Concluído" e acompanhe suas compras.</p>
+                </div>
+              </div>
+
+              <div class="todo-stats-group">
+                <span id="todo-counter-text" class="todo-stat-badge">1 de 3 no carrinho</span>
+                <button type="button" id="btn-copy-shopping-list" class="btn btn-secondary btn-sm"
+                  title="Copiar lista de compras para o WhatsApp / Bloco de Notas">
+                  📋 Copiar Lista
+                </button>
+                <button type="button" id="btn-clear-cart-items" class="btn btn-secondary btn-sm"
+                  style="color: var(--slate-600);" title="Remover apenas os itens marcados no carrinho">
+                  Limpar Carrinho
+                </button>
+              </div>
+            </div>
+
+            <!-- Formulário de Adicionar Item -->
+            <form id="todo-form" class="todo-input-form">
+              <input type="text" id="todo-input-name" class="todo-text-input"
+                placeholder="O que você precisa comprar? (Ex: Café torrado, Leite integral, Sabão em pó...)" required />
+              <button type="submit" class="btn btn-primary" style="padding: 0.75rem 1.25rem;">
+                <span style="font-weight: 800;">+</span>
+                <span>Adicionar</span>
+              </button>
+            </form>
+
+            <!-- Filtros de Visualização -->
+            <div class="todo-tabs-bar">
+              <div class="todo-filter-btns">
+                <button type="button" class="todo-filter-btn active" data-todo-filter="all">Todos</button>
+                <button type="button" class="todo-filter-btn" data-todo-filter="pending">
+                  Pendentes (<span id="todo-pending-count">2</span>)
+                </button>
+                <button type="button" class="todo-filter-btn" data-todo-filter="completed">
+                  No Carrinho (<span id="todo-cart-count">1</span>)
+                </button>
+              </div>
+              <span style="font-size: 0.75rem; color: var(--slate-400);">Dica: clique no item para alternar</span>
+            </div>
+
+            <!-- Itens da Lista -->
+            <div id="todo-items-container" class="todo-items-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 5. SEÇÃO: 📖 AULAS & EVOLUÇÃO (IMERSÃO)    -->
+    <!-- ========================================== -->
+    <section id="view-lessons" class="route-section" data-section="view-lessons">
+      <div class="container">
+        <div class="lessons-container">
+          <!-- Hero da Trajetória -->
+          <div class="lessons-hero-card">
+            <div class="lessons-hero-badge">
+              <span>🚀</span>
+              <span>Jornada de Aprendizado</span>
+            </div>
+            <h2 class="lessons-hero-title">Trajetória da Imersão: <span>Aulas & Evolução</span></h2>
+            <p class="lessons-hero-subtitle">
+              Acompanhe a evolução passo a passo da construção do Economarket, desde os conceitos fundamentais de lógica
+              e matemática até a arquitetura web modular com IA.
+            </p>
+          </div>
+
+          <!-- Grade de Cartões das 3 Aulas -->
+          <div id="lessons-cards-container" class="lessons-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- 6. SEÇÃO: 💰 ORÇAMENTO LIMITE — 🛒 SACOLA CONTROLADA           -->
+    <!-- ============================================================== -->
+    <section id="view-budget" class="route-section" data-section="view-budget">
+      <div class="container">
+        <div class="budget-container">
+
+          <!-- Banner Superior com o Título em Destaque -->
+          <div class="budget-hero-card">
+            <div class="budget-hero-badge">
+              <span>🎯</span>
+              <span>Controle Financeiro em Tempo Real</span>
+            </div>
+            <h1 class="budget-hero-title">💰 Orçamento Limite — <span>🛒 Sacola Controlada</span></h1>
+            <p class="budget-hero-subtitle">
+              Defina o teto máximo que deseja gastar no supermercado e adicione produtos à sacola. Acompanhe o consumo
+              do orçamento instantaneamente com alertas visuais inteligentes.
+            </p>
+          </div>
+
+          <!-- Grade de Métricas Principais -->
+          <div class="budget-metrics-grid">
+            <!-- Card 1: Orçamento Total (Editável) -->
+            <div class="budget-metric-card">
+              <div>
+                <div class="budget-metric-header">
+                  <span class="budget-metric-label">Orçamento Total</span>
+                  <div class="budget-metric-icon icon-limit">🎯</div>
+                </div>
+                <div class="budget-limit-input-wrap">
+                  <span class="budget-currency-symbol">R$</span>
+                  <input type="text" id="budget-limit-input" class="budget-limit-input" value="200,00"
+                    placeholder="0,00" title="Clique para editar o seu teto de gastos"
+                    aria-label="Orçamento Total em Reais" />
+                </div>
+              </div>
+              <div>
+                <div class="budget-preset-chips">
+                  <span style="font-size: 0.6875rem; color: var(--slate-400); font-weight: 600;">Atalhos:</span>
+                  <button type="button" class="budget-preset-chip" data-preset="100">R$ 100</button>
+                  <button type="button" class="budget-preset-chip" data-preset="150">R$ 150</button>
+                  <button type="button" class="budget-preset-chip" data-preset="200">R$ 200</button>
+                  <button type="button" class="budget-preset-chip" data-preset="300">R$ 300</button>
+                  <button type="button" class="budget-preset-chip" data-preset="500">R$ 500</button>
+                </div>
+                <div class="budget-metric-sub">Teto máximo definido para as compras</div>
+              </div>
+            </div>
+
+            <!-- Card 2: Total da Sacola -->
+            <div class="budget-metric-card">
+              <div>
+                <div class="budget-metric-header">
+                  <span class="budget-metric-label">Total da Sacola</span>
+                  <div class="budget-metric-icon icon-cart">🛒</div>
+                </div>
+                <div id="budget-metric-spent" class="budget-metric-val">R$ 0,00</div>
+              </div>
+              <div>
+                <div id="budget-metric-count" class="budget-metric-sub">0 itens (0 un)</div>
+                <div class="budget-metric-sub">Soma de todos os subtotais</div>
+              </div>
+            </div>
+
+            <!-- Card 3: Saldo Restante (Dinâmico) -->
+            <div class="budget-metric-card">
+              <div>
+                <div class="budget-metric-header">
+                  <span class="budget-metric-label">Saldo Restante</span>
+                  <div class="budget-metric-icon icon-balance">💳</div>
+                </div>
+                <div id="budget-metric-balance" class="budget-metric-val saldo-verde">R$ 200,00</div>
+              </div>
+              <div>
+                <div id="budget-balance-sub" class="budget-metric-sub"
+                  style="color: var(--green-600); font-weight: 700;">Disponível para gastar</div>
+                <div class="budget-metric-sub">Orçamento Total − Total da Sacola</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Barra de Progresso e Alertas Visuais Dinâmicos -->
+          <div class="budget-progress-card">
+            <div class="progress-header">
+              <div class="progress-title-wrap">
+                <span class="progress-title">Consumo do Limite</span>
+                <span id="budget-status-badge" class="progress-status-badge status-badge-green">
+                  <span>✅</span> <span>Saldo Confortável</span>
+                </span>
+              </div>
+              <div class="progress-percent-text">
+                <span id="budget-progress-percent">0.0%</span>
+                <span style="font-size: 0.75rem; color: var(--slate-400); font-weight: 600;">utilizado</span>
+              </div>
+            </div>
+
+            <div class="progress-track" role="progressbar" aria-label="Progresso do orçamento">
+              <div id="budget-progress-fill" class="progress-bar-fill bar-green" style="width: 0%;"></div>
+            </div>
+
+            <!-- Mensagem de Alerta Contextual Dinâmico (Amarelo ou Vermelho) -->
+            <div id="budget-alert-container"></div>
+          </div>
+
+          <!-- Formulário Simples para Adicionar Itens à Sacola -->
+          <div class="budget-form-card">
+            <div class="budget-form-header">
+              <h3>
+                <span>➕</span>
+                <span>Adicionar Produto à Sacola Controlada</span>
+              </h3>
+              <span style="font-size: 0.75rem; color: var(--slate-500);">Cálculo automático de subtotal em tempo
+                real</span>
+            </div>
+            <div class="budget-form-body">
+              <form id="budget-item-form">
+                <div class="budget-input-row">
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label class="form-label" for="budget-item-name">Nome do Produto <span
+                        class="required">*</span></label>
+                    <input type="text" id="budget-item-name" class="form-input" list="list-existing-products"
+                      placeholder="Ex: Leite Integral 1L, Arroz 5kg, Azeite..." required />
+                  </div>
+
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label class="form-label" for="budget-item-qty">Quantidade <span class="required">*</span></label>
+                    <input type="number" id="budget-item-qty" class="form-input" value="1" min="1" step="1" required />
+                  </div>
+
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label class="form-label" for="budget-item-price">Preço Unitário (R$) <span
+                        class="required">*</span></label>
+                    <input type="text" id="budget-item-price" class="form-input" placeholder="0,00" required />
+                    <div class="item-subtotal-preview">
+                      Subtotal: <strong id="budget-subtotal-preview-val">R$ 0,00</strong>
+                    </div>
+                  </div>
+
+                  <div>
+                    <button type="submit" class="btn btn-primary"
+                      style="min-height: 44px; white-space: nowrap; width: 100%;">
+                      <span>+</span>
+                      <span>Adicionar à Sacola</span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Lista / Tabela da Sacola Controlada -->
+          <div class="budget-cart-card">
+            <div class="budget-cart-header">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.25rem;">🛒</span>
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--slate-900);">
+                  Itens na Sacola Controlada
+                </h3>
+              </div>
+              <button type="button" id="btn-clear-budget-bag" class="btn btn-secondary"
+                style="padding: 0.35rem 0.75rem; font-size: 0.75rem; color: var(--rose-600); border-color: var(--rose-200);"
+                title="Esvaziar todos os itens da sacola">
+                🗑️ Esvaziar Sacola
+              </button>
+            </div>
+
+            <!-- Tabela com Itens -->
+            <div id="budget-table-wrapper" style="overflow-x: auto;">
+              <table class="cart-items-table">
+                <thead>
+                  <tr>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Preço Unitário</th>
+                    <th class="text-right">Subtotal</th>
+                    <th class="text-right" style="width: 60px;">Ação</th>
+                  </tr>
+                </thead>
+                <tbody id="budget-items-tbody"></tbody>
+              </table>
+            </div>
+
+            <!-- Estado Vazio da Sacola -->
+            <div id="budget-empty-bag" class="budget-empty-bag" style="display: none;">
+              <div class="budget-empty-icon">🛒</div>
+              <h4 style="font-weight: 700; color: var(--slate-700); margin-bottom: 0.25rem;">Sua sacola controlada está
+                vazia</h4>
+              <p style="font-size: 0.875rem; color: var(--slate-400);">Adicione produtos acima com preço e quantidade
+                para acompanhar o consumo do orçamento em tempo real.</p>
+            </div>
+
+            <!-- Rodapé com Total Geral -->
+            <div id="budget-table-footer" class="budget-cart-footer">
+              <div style="font-size: 0.8125rem; color: var(--slate-500);">
+                Totalizador: <strong id="budget-cart-count">0 itens</strong> cadastrados
+              </div>
+              <div class="cart-total-summary">
+                <span class="cart-total-label">Total da Sacola:</span>
+                <span id="budget-cart-total" class="cart-total-amount">R$ 0,00</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé Global -->
+  <footer class="app-footer">
+    <div class="container footer-content">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span class="footer-brand">Econo<span>market</span></span>
+        <span>— Projeto Modular Estático Puro (HTML / CSS / JS)</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button type="button" id="btn-reset-data"
+          style="color: var(--slate-500); font-size: 0.75rem; text-decoration: underline; cursor: pointer;">
+          Restaurar Dados de Exemplo
+        </button>
+        <span>Dados armazenados localmente no seu navegador via localStorage.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal de Cadastrar / Editar Oferta -->
+  <div id="modal-offer" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-header-title">
+          <span>🏪</span>
+          <h3 id="modal-offer-title">Cadastrar Nova Oferta</h3>
+        </div>
+        <button type="button" class="modal-close-btn" data-close-modal>&times;</button>
+      </div>
+
+      <form id="offer-modal-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Nome do Produto <span class="required">*</span></label>
+            <input type="text" id="offer-input-product" class="form-input" list="list-existing-products"
+              placeholder="Ex: Café Torrado e Moído Tradicional 500g" required />
+            <datalist id="list-existing-products"></datalist>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Categoria <span class="required">*</span></label>
+            <select id="offer-select-category" class="form-select" required>
+              <option value="Mercearia & Grãos">Mercearia & Grãos</option>
+              <option value="Biscoitos, Pães & Matinais">Biscoitos, Pães & Matinais</option>
+              <option value="Laticínios & Frios">Laticínios & Frios</option>
+              <option value="Carnes & Aves">Carnes & Aves</option>
+              <option value="Sobremesas & Doces">Sobremesas & Doces</option>
+              <option value="Hortifruti & Limpeza">Hortifruti & Limpeza</option>
+              <option value="Bebidas">Bebidas</option>
+              <option value="Higiene & Cuidados">Higiene & Cuidados</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Supermercado / Rede <span class="required">*</span></label>
+            <input type="text" id="offer-input-market" class="form-input" list="list-existing-markets"
+              placeholder="Ex: Assaí Atacadista, Atacadão, Carrefour..." required />
+            <datalist id="list-existing-markets"></datalist>
+          </div>
+
+          <div class="form-row-2col">
+            <div class="form-group">
+              <label class="form-label">Preço (R$) <span class="required">*</span></label>
+              <input type="text" id="offer-input-price" class="form-input" placeholder="0,00" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Data da Coleta <span class="required">*</span></label>
+              <input type="date" id="offer-input-date" class="form-input" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Observações (Opcional)</label>
+            <input type="text" id="offer-input-notes" class="form-input"
+              placeholder="Ex: Preço de atacado a partir de 3 un." />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-close-modal>Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar Cotação</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Container de Toasts Flutuantes -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts Modulares Puros (Carregamento Ordenado) -->
+  <script src="js/utils/storage.js"></script>
+  <script src="js/utils/mathEvaluator.js"></script>
+  <script src="js/utils/router.js"></script>
+  <script src="js/components/Navigation.js"></script>
+  <script src="js/components/Home.js"></script>
+  <script src="js/components/SimpleCalculator.js"></script>
+  <script src="js/components/AdvancedCalculator.js"></script>
+  <script src="js/components/TodoList.js"></script>
+  <script src="js/components/Lessons.js"></script>
+  <script src="js/components/BudgetCalculator.js"></script>
+  <script src="js/utils/app.js"></script>
+
+  <script>
+    // Registra o service worker (funciona em https:// e em localhost)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('sw.js').catch(function (err) {
+          console.warn('Service worker não registrado:', err);
+        });
+      });
+    }
+  </script>
+
+</body>
+
+</html>
